@@ -21,9 +21,9 @@ void GrapStart(int width, int lenght, std::string character,
 
 void GrapPrint(grappos::Create_WIN &window) {
   for (int i = 0; i != window.WINDOW.size(); i++) {
-    std::cout << window.PALLETE[i];
-    std::cout << window.WINDOW[i];
-    std::cout << "\033[0m";
+    std::cout << window.PALLETE[i] << std::flush;
+    std::cout << window.WINDOW[i] << std::flush;
+    std::cout << "\033[0m" << std::flush;
   }
   std::cout << std::endl;
 }
