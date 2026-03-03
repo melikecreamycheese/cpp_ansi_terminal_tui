@@ -18,6 +18,8 @@ void GrapStart(int width, int lenght, std::string character, Create_WIN &window,
 void GrapPrint(Create_WIN &window);
 void GrapPlaceAscii(Create_WIN &window, int x, int y, std::string ascii);
 void GrapPlacePallete(Create_WIN &window, int x, int y, std::string colour);
+void Clear();
+void WaitMs(int time);
 } // namespace grappos
 
 #endif

@@ -1,6 +1,8 @@
 #include "grappos.h"
+#include <chrono>
 #include <iostream>
 #include <string>
+#include <thread>
 #include <vector>
 
 namespace grappos {
@@ -31,7 +33,15 @@ void GrapPrint(grappos::Create_WIN &window) {
 void GrapPlaceAscii(Create_WIN &window, int x, int y, std::string ascii) {
   window.WINDOW[x + y * (window.WIDTH + 1)] = ascii;
 }
+
 void GrapPlacePallete(Create_WIN &window, int x, int y, std::string colour) {
   window.PALLETE[x + y * (window.WIDTH + 1)] = colour;
 }
+
+void Clear() { std::cout << "\x1B[2J\x1B[H" << std::flush; }
+
+void WaitMs(int time) {
+  std::this_thread::sleep_for(std::chrono::milliseconds(time));
+}
+
 } // namespace grappos
