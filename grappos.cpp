@@ -44,4 +44,16 @@ void WaitMs(int time) {
   std::this_thread::sleep_for(std::chrono::milliseconds(time));
 }
 
+void HoLine(Create_WIN &window, int x, int y, int h, std::string ascii) {
+  for (int i = 0; i < h; i++) {
+    GrapPlaceAscii(window, x + i, y, ascii);
+  }
+}
+
+void VeLine(Create_WIN &window, int x, int y, int v, std::string ascii) {
+  for (int i = 0; i < v; i++) {
+    GrapPlaceAscii(window, x, y + i, ascii);
+  }
+}
+
 } // namespace grappos

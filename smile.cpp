@@ -19,6 +19,8 @@ int main() {
   grappos::GrapPlaceAscii(display, 1, 1, "@");
   grappos::GrapPlaceAscii(display, 3, 1, "@");
 
+  grappos::HoLine(display, 0, 0, 5, "^");
+
   grappos::GrapPrint(display);
 
   std::cout << "wait...\n" << std::flush;
