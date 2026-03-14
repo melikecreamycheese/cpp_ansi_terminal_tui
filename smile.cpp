@@ -19,7 +19,7 @@ int main() {
   grappos::GrapPlaceAscii(display, 1, 1, "@");
   grappos::GrapPlaceAscii(display, 3, 1, "@");
 
-  grappos::HoLine(display, 0, 0, 5, "^");
+  grappos::HoLine(display, {0, 0}, 5, c_colours::Foreground::Magenta + "^");
 
   grappos::GrapPrint(display);
 

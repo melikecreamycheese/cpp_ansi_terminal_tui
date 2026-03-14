@@ -13,6 +13,11 @@ struct Create_WIN {
   int LENGHT;
 };
 
+struct Vec2 {
+  int x;
+  int y;
+};
+
 void GrapStart(int width, int lenght, std::string character, Create_WIN &window,
                std::string colour);
 void GrapPrint(Create_WIN &window);
@@ -21,8 +26,8 @@ void GrapPlacePallete(Create_WIN &window, int x, int y, std::string colour);
 void Clear();
 void WaitMs(int time);
 
-void HoLine(Create_WIN &window, int x, int y, int h, std::string ascii);
-void VeLine(Create_WIN &window, int x, int y, int v, std::string ascii);
+void HoLine(Create_WIN &window, Vec2 pos, int h, std::string ascii);
+void VeLine(Create_WIN &window, Vec2 pos, int v, std::string ascii);
 } // namespace grappos
 
 #endif

@@ -25,7 +25,6 @@ void GrapPrint(grappos::Create_WIN &window) {
   for (int i = 0; i != window.WINDOW.size(); i++) {
     std::cout << window.PALLETE[i] << std::flush;
     std::cout << window.WINDOW[i] << std::flush;
-    std::cout << "\033[0m" << std::flush;
   }
   std::cout << std::endl;
 }
@@ -44,15 +43,15 @@ void WaitMs(int time) {
   std::this_thread::sleep_for(std::chrono::milliseconds(time));
 }
 
-void HoLine(Create_WIN &window, int x, int y, int h, std::string ascii) {
+void HoLine(Create_WIN &window, Vec2 pos, int h, std::string ascii) {
   for (int i = 0; i < h; i++) {
-    GrapPlaceAscii(window, x + i, y, ascii);
+    GrapPlaceAscii(window, pos.x + i, pos.y, ascii);
   }
 }
 
-void VeLine(Create_WIN &window, int x, int y, int v, std::string ascii) {
+void VeLine(Create_WIN &window, Vec2 pos, int v, std::string ascii) {
   for (int i = 0; i < v; i++) {
-    GrapPlaceAscii(window, x, y + i, ascii);
+    GrapPlaceAscii(window, pos.x, pos.y + i, ascii);
   }
 }
 
