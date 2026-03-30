@@ -55,4 +55,12 @@ void VeLine(Create_WIN &window, Vec2 pos, int v, std::string ascii) {
   }
 }
 
+void FillWin(std::string character, Create_WIN &window) {
+  for (int i=0; i < window.LENGHT; i++) {
+    for (int k=0; k < window.WIDTH; k++) {
+      GrapPlaceAscii(window, k, i, character);
+    }
+  }
+}
+
 } // namespace grappos
