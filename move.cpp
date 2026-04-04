@@ -15,15 +15,19 @@ int main() {
     key = GetKeyInput;
     switch (key)
     {
+    case 'A':
     case 'a':
       x -= 1;
       break;
+    case 'D':
     case 'd':
       x += 1;
       break;
+    case 'W':
     case 'w':
       y -= 1;
       break;
+    case 'S':
     case 's':
       y += 1;
       break;
@@ -32,10 +36,7 @@ int main() {
     grappos::GrapPlaceAscii(display, x, y, "#");
     grappos::Clear();
     grappos::GrapPrint(display);
+    grappos::WaitMs(100);
   }
-
-
-  
-
   return 0;
 }

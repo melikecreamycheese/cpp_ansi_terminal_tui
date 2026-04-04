@@ -5,38 +5,48 @@
 #include <stdlib.h>
 
 #if defined(_WIN64) || defined(_WIN32)
-    #include <conio.h>
     #include <windows.h>
+
     char GetKeyInputWin() {
-        while(!_kbhit()) { }
-        return _getch();
+        for (int key =0; key < 256; key++) {
+            if (GetAsyncKeyState(key) & 0x8000) {
+                return key;
+            }
+        }
+        return -1;
     }
     #define GetKeyInput GetKeyInputWin();
 #elif defined(__linux__)
     #include <termios.h>
     #include <unistd.h>
+    #include <fcntl.h>
+    struct termios oldt;
 
-    struct termios orig_termios;
+    void enableRawMode()
+    {
+        termios newt;
+        tcgetattr(STDIN_FILENO, &oldt);
+        newt = oldt;
 
-    void disable_raw_mode() {
-        tcsetattr(STDIN_FILENO, TCSAFLUSH, &orig_termios);
+        newt.c_lflag &= ~(ICANON | ECHO); // no buffering, no echo
+        tcsetattr(STDIN_FILENO, TCSANOW, &newt);
+
+        // make stdin non-blocking
+        fcntl(STDIN_FILENO, F_SETFL, O_NONBLOCK);
     }
 
-    void enable_raw_mode() {
-        tcgetattr(STDIN_FILENO, &orig_termios);
-        struct termios raw = orig_termios;
-        raw.c_lflag &= ~(ICANON | ECHO); // Disable canonical mode and echo
-        raw.c_cc[VMIN] = 1;              // Wait for at least 1 byte
-        raw.c_cc[VTIME] = 0;             // No timeout
-        tcsetattr(STDIN_FILENO, TCSAFLUSH, &raw);
-        atexit(disable_raw_mode);
+    void disableRawMode()
+    {
+        tcsetattr(STDIN_FILENO, TCSANOW, &oldt);
     }
     int GetKeyInputLin() {
-        enable_raw_mode();
-        int ch;
-        while ((ch = getchar()) < 0) {}
-        disable_raw_mode();
-        return ch;
+        enableRawMode();
+        unsigned char ch;
+        if (read(STDIN_FILENO, &ch, 1) == 1)
+            return ch; // return ASCII key
+        disableRawMode();
+        return -1; // no key pressed
+        
     }
     #define GetKeyInput GetKeyInputLin();
 #endif
